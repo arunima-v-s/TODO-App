@@ -1,0 +1,48 @@
+<!-- templates/points.html -->
+
+<!-- points.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Total Points</title>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>Total Points</h2>
+    <p>Total points: {{ total_points }}</p>
+
+    <!-- Add a canvas element for the chart -->
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        // JavaScript code to render the chart
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Points'],
+                    datasets: [{
+                        label: 'Points',
+                        data: [{{ total_points }}],  // Data from Django view
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
